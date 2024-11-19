@@ -14,7 +14,7 @@ const SystemRules: KarabinerRules[] = [
           modifiers: {
             optional: ["any"],
           },
-        },
+          },
         to: [
           {
             set_variable: {
@@ -39,43 +39,27 @@ const SystemRules: KarabinerRules[] = [
         type: "basic",
       },
       // Remap hyper + tab to cmd + tab 
-{ 
-        type: "basic",
-        description: "Hyper Key + Tab -> CMD + Tab",
-        from: {
-          key_code: "tab",
-          modifiers: {
-            optional: ["left_command", "shift", "left_alt", "left_option"],
-          },
-        },
-        to: [
-          {
-            key_code: "tab",
-            modifiers: ["left_command"],
-          },
-        ],
-},
-
-      //      {
-      //        type: "basic",
-      //        description: "Disable CMD + Tab to force Hyper Key usage",
-      //        from: {
-      //          key_code: "tab",
-      //          modifiers: {
-      //            mandatory: ["left_command"],
-      //          },
-      //        },
-      //        to: [
-      //          {
-      //            key_code: "tab",
-      //          },
-      //        ],
-      //      },
+// { 
+//         type: "basic",
+//         description: "Hyper Key + Tab -> CMD + Tab",
+//         from: {
+//           key_code: "tab",
+//           modifiers: {
+//             optional: ["left_command", "shift", "left_alt", "left_option"],
+//           },
+//         },
+//         to: [
+//           {
+//             key_code: "tab",
+//             modifiers: ["left_command"],
+//           },
+//         ],
+// },
     ],
   },
   ...createHyperSubLayers({
     spacebar: open(
-      "raycast://extensions/stellate/mxstbr-commands/create-notion-todo"
+      "raycast://"
     ),
     // b = "B"rowse
     b: {
