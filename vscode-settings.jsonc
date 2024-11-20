@@ -1,0 +1,290 @@
+// Place your key bindings in this file to override the defaults
+[
+  /**
+
+
+  Information -- bindings that reveal information or navigate to it
+
+
+  */
+  {
+    "command": "editor.action.triggerSuggest",
+    "key": "cmd+space",
+    "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly && !suggestWidgetVisible"
+  }, // Bring up suggestion menu
+
+  {
+    "command": "editor.action.showHover",
+    "key": "shift-k",
+    "when": "vim.mode == 'Normal' && editorTextFocus"
+  }, // Show hover for current symbol
+
+  {
+    "command": "editor.action.peekTypeDefinition",
+    "key": "shift-l",
+    "when": "vim.mode == 'Normal' && editorTextFocus"
+  }, // Peek at type definition
+
+  {
+    "command": "editor.action.revealDefinition",
+    "key": "space g d",
+    "when": "vim.mode == 'Normal' && editorTextFocus"
+  }, // Jump to definition
+
+  {
+    "command": "editor.action.goToReferences",
+    "key": "space g r",
+    "when": "vim.mode == 'Normal' && editorTextFocus"
+  }, // Jump to references
+  /**
+
+
+    Code Actions 
+
+
+
+  */
+  {
+    "command": "editor.action.rename",
+    "key": "space c r",
+    "when": "vim.mode == 'Normal' && editorTextFocus"
+  }, // Rename symbol
+  {
+    "command": "workbench.action.gotoSymbol",
+    "key": "space c s",
+    "when": "vim.mode == 'Normal' && editorTextFocus"
+  }, // Go to symbol
+  {
+    "command": "editor.action.codeAction",
+    "key": "space c a",
+    "when": "vim.mode == 'Normal' && editorTextFocus"
+  }, // Quick fix
+  {
+    "args": {
+      "cwd": "${fileDirname}"
+    },
+    "command": "workbench.action.terminal.newWithCwd",
+    "key": "alt+cmd+j"
+  }, // Add new terminal at the director of the current file
+  /** 
+
+
+  FOCUS / LAYOUT -- alter where the focus is, or what windows are open / where they are
+
+
+  */
+  {
+    "command": "workbench.action.showAllEditors",
+    "key": "space ,",
+    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+  }, // Show all editors
+  {
+    "args": {
+      "commands": [
+        "workbench.action.toggleSidebarVisibility",
+        "workbench.files.action.focusFilesExplorer"
+      ]
+    },
+    "command": "runCommands",
+    "key": "space e",
+    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus) && !sideBarFocus"
+  }, // Toggle sidebar visibility and focus files explorer
+  {
+    "command": "workbench.view.extension.project-manager",
+    "key": "shift+cmd+m"
+  }, // Focus Project Manager
+  {
+    "command": "workbench.action.focusPanel",
+    "key": "shift+cmd+j"
+  }, // Focus Terminal Panel
+
+  {
+    "args": {
+      "commands": [
+        "workbench.action.toggleSidebarVisibility",
+        "workbench.action.focusActiveEditorGroup"
+      ]
+    },
+    "command": "runCommands",
+    "key": "space e",
+    "when": "vim.mode == 'Normal' && sideBarFocus && !inputFocus"
+  }, // Toggle sidebar visibility and focus active editor group
+  {
+    "command": "workbench.files.action.focusFilesExplorer",
+    "key": "space e",
+    "when": "vim.mode == 'Normal' && editorTextFocus && foldersViewVisible"
+  }, // Focus Files Explorer
+  {
+    "command": "workbench.action.previousEditorInGroup",
+    "key": "shift-tab",
+    "when": "(vim.mode == 'Normal' || vim.mode == 'Visual') && (editorTextFocus || !inputFocus)"
+  }, // Previous editor in group
+  {
+    "command": "workbench.action.findInFiles",
+    "key": "space s g",
+    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+  },
+  {
+    "args": {
+      "commands": ["workbench.view.scm", "workbench.scm.focus"]
+    },
+    "command": "runCommands",
+    "key": "space g g",
+    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+  },
+  {
+    "command": "editor.action.addSelectionToNextFindMatch",
+    "key": "ctrl-n",
+    "when": "(vim.mode == 'Normal' || vim.mode == 'Visual') && (editorTextFocus || !inputFocus)"
+  },
+  /**
+
+
+    FILE EXPLORER -- Hotkeys for when the file explorer is focused
+
+
+  */
+  {
+    "command": "renameFile",
+    "key": "r",
+    "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+  },
+  {
+    "command": "filesExplorer.copy",
+    "key": "c",
+    "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+  },
+  {
+    "command": "filesExplorer.paste",
+    "key": "p",
+    "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+  },
+  {
+    "command": "filesExplorer.cut",
+    "key": "x",
+    "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+  },
+  {
+    "command": "deleteFile",
+    "key": "d",
+    "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+  },
+  {
+    "command": "explorer.newFile",
+    "key": "a",
+    "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+  },
+  {
+    "command": "explorer.newFolder",
+    "key": "shift-a",
+    "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+  },
+  {
+    "command": "explorer.openToSide",
+    "key": "s",
+    "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+  },
+  {
+    "args": {
+      "commands": [
+        "workbench.action.splitEditorDown",
+        "explorer.openAndPassFocus",
+        "workbench.action.closeOtherEditors"
+      ]
+    },
+    "command": "runCommands",
+    "key": "shift-s",
+    "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+  },
+  {
+    "command": "explorer.openAndPassFocus",
+    "key": "enter",
+    "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceIsFolder && !inputFocus"
+  },
+  {
+    "command": "list.toggleExpand",
+    "key": "enter",
+    "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && explorerResourceIsFolder && !inputFocus"
+  },
+  /**
+
+
+  TERMINAL Hotkeys for when the terminal is focused
+
+
+   */
+  {
+    "command": "workbench.action.terminal.focusNext",
+    "key": "tab",
+    "when": "terminalFocus && terminalHasBeenCreated && !terminalEditorFocus || terminalFocus && terminalProcessSupported && !terminalEditorFocus"
+  },
+  {
+    "command": "-workbench.action.terminal.focusNext",
+    "key": "shift+tab",
+    "when": "terminalFocus && terminalHasBeenCreated && !terminalEditorFocus || terminalFocus && terminalProcessSupported && !terminalEditorFocus"
+  },
+  {
+    "command": "workbench.action.terminal.new",
+    "key": "cmd+t",
+    "when": "terminalFocus && terminalHasBeenCreated && !terminalEditorFocus || terminalFocus && terminalProcessSupported && !terminalEditorFocus"
+  },
+  {
+    "command": "workbench.action.terminal.kill",
+    "key": "cmd+w",
+    "when": "terminalFocus && terminalHasBeenCreated && !terminalEditorFocus || terminalFocus && terminalProcessSupported && !terminalEditorFocus"
+  },
+  {
+    "command": "workbench.action.terminal.split",
+    "key": "cmd+s",
+    "when": "terminalFocus && terminalProcessSupported || terminalFocus && terminalWebExtensionContributedProfile"
+  },
+  {
+    "command": "-workbench.action.terminal.split",
+    "key": "cmd+\\",
+    "when": "terminalFocus && terminalProcessSupported || terminalFocus && terminalWebExtensionContributedProfile"
+  },
+  /**
+
+
+LISTS - navigating popoup lists
+
+
+*/
+  {
+    "command": "selectPrevSuggestion",
+    "key": "cmd+k",
+    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
+  },
+  {
+    "command": "selectNextSuggestion",
+    "key": "cmd+j",
+    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
+  },
+  {
+    "command": "list.focusUp",
+    "key": "cmd+k",
+    "when": "listFocus && !inputFocus && !treestickyScrollFocused"
+  },
+
+  {
+    "command": "list.focusDown",
+    "key": "cmd+j",
+    "when": "listFocus && !inputFocus"
+  },
+  {
+    "command": "quickInput.next",
+    "key": "cmd+j",
+    "when": "inQuickOpen"
+  },
+  {
+    "command": "quickInput.previous",
+    "key": "cmd+k",
+    "when": "inQuickOpen"
+  }
+
+  /**
+
+Uncategorized
+
+*/
+]

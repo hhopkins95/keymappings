@@ -25,14 +25,14 @@ const SystemRules: KarabinerRules[] = [
       {
         description: "",
         from: {
-          key_code: "right_control",
+          key_code: "left_command",
           modifiers: {
             optional: ["any"],
           },
         },
         to: [
           {
-            key_code: "right_command",
+            key_code: "left_control",
           },
         ],
         type: "basic",
@@ -66,7 +66,7 @@ const SystemRules: KarabinerRules[] = [
               name: "hyper",
               value: 0,
             },
-                        },
+              },
         ],
         to_if_alone: [
           {
@@ -129,7 +129,7 @@ const SystemRules: KarabinerRules[] = [
      *  convenient modifiers for cmd and cmd + shift
      *
      * a = "cmd"
-     * s = "cmd + shift"  -- navigation based (moving between windows, tabs, etc.)
+     * d = "cmd + shift"  -- navigation based (moving between windows, tabs, etc.)
      *
      * - set up relevant shortcuts in apps (ie VsCode, Arc...)
      */
@@ -138,11 +138,20 @@ const SystemRules: KarabinerRules[] = [
       to: [
         {
           key_code: "left_command",
-          modifiers: ["left_command"],
         },
       ],
     },
-    s: {
+
+    s : { 
+      to : [ 
+        { 
+          key_code: "left_control",
+        }
+      ]
+    },  
+
+
+    d: {
       to: [
         {
           key_code: "left_command",
@@ -154,8 +163,7 @@ const SystemRules: KarabinerRules[] = [
     /**
      * WINDOW
      */
-    // w = "Window" via rectangle.app
-    w: {
+    f: {
       semicolon: {
         description: "Window: Hide",
         to: [
@@ -171,7 +179,8 @@ const SystemRules: KarabinerRules[] = [
       j: rectangle("bottom-half"),
       h: rectangle("left-half"),
       l: rectangle("right-half"),
-      f: rectangle("main"),
+      m: rectangle("almost-maximize"),
+
       u: {
         description: "Window: Previous Tab",
         to: [
@@ -209,15 +218,15 @@ const SystemRules: KarabinerRules[] = [
         ],
       },
       // Note: No literal connection. Both f and n are already taken.
-      m: {
-        description: "Window: Forward",
-        to: [
-          {
-            key_code: "close_bracket",
-            modifiers: ["right_command"],
-          },
-        ],
-      },
+      // m: {
+      //   description: "Window: Forward",
+      //   to: [
+      //     {
+      //       key_code: "close_bracket",
+      //       modifiers: ["right_command"],
+      //     },
+      //   ],
+      // },
     },
 
     /**
@@ -265,7 +274,7 @@ const SystemRules: KarabinerRules[] = [
     },
 
     // s = "System"
-    d: {
+    z: {
       u: {
         to: [
           {

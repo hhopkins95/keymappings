@@ -17,7 +17,7 @@ type HyperKeySublayer = {
 /**
  * Create a Hyper Key sublayer, where every command is prefixed with a key
  * e.g. Hyper + O ("Open") is the "open applications" layer, I can press
- * e.g. Hyper + O + G ("Google Chrome") to open Chrome
+ * e.g. Hyper + O + G ("Google Chrome") to open Chrom
  */
 export function createHyperSubLayer(
   sublayer_key: KeyCode,
