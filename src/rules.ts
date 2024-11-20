@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import { KarabinerRules } from "./types.ts";
-import { createHyperSubLayers, app, open, rectangle, shell } from "./utils.ts";
+import { app, createHyperSubLayers, open, rectangle, shell } from "./utils.ts";
 
 const SystemRules: KarabinerRules[] = [
   // Define the Hyper key itself
@@ -14,7 +14,7 @@ const SystemRules: KarabinerRules[] = [
           modifiers: {
             optional: ["any"],
           },
-          },
+        },
         to: [
           {
             set_variable: {
@@ -38,71 +38,61 @@ const SystemRules: KarabinerRules[] = [
         ],
         type: "basic",
       },
-      // Remap hyper + tab to cmd + tab 
-// { 
-//         type: "basic",
-//         description: "Hyper Key + Tab -> CMD + Tab",
-//         from: {
-//           key_code: "tab",
-//           modifiers: {
-//             optional: ["left_command", "shift", "left_alt", "left_option"],
-//           },
-//         },
-//         to: [
-//           {
-//             key_code: "tab",
-//             modifiers: ["left_command"],
-//           },
-//         ],
-// },
+      // Remap hyper + tab to cmd + tab
+      // {
+      //         type: "basic",
+      //         description: "Hyper Key + Tab -> CMD + Tab",
+      //         from: {
+      //           key_code: "tab",
+      //           modifiers: {
+      //             optional: ["left_command", "shift", "left_alt", "left_option"],
+      //           },
+      //         },
+      //         to: [
+      //           {
+      //             key_code: "tab",
+      //             modifiers: ["left_command"],
+      //           },
+      //         ],
+      // },
     ],
   },
   ...createHyperSubLayers({
-    spacebar: open(
-      "raycast://"
-    ),
-    // b = "B"rowse
-    b: {
-      t: open("https://twitter.com"),
-      // Quarterly "P"lan
-      p: open("https://mxstbr.com/cal"),
-      y: open("https://news.ycombinator.com"),
-      f: open("https://facebook.com"),
-      r: open("https://reddit.com"),
-      h: open("https://hashnode.com/draft"),
-    },
-    // o = "Open" applications
-    o: {
-      1: app("1Password"),
-      g: app("Google Chrome"),
-      c: app("Notion Calendar"),
-      v: app("Zed"),
-      d: app("Discord"),
-      s: app("Slack"),
-      e: app("Superhuman"),
-      n: app("Notion"),
-      t: app("Terminal"),
-      // Open todo list managed via *H*ypersonic
-      h: open(
-        "notion://www.notion.so/stellatehq/7b33b924746647499d906c55f89d5026"
-      ),
-      z: app("zoom.us"),
-      // "M"arkdown (Reflect.app)
-      m: app("Reflect"),
-      r: app("Reflect"),
-      f: app("Finder"),
-      // "i"Message
-      i: app("Texts"),
-      p: app("Spotify"),
-      a: app("iA Presenter"),
-      // "W"hatsApp has been replaced by Texts
-      w: open("Texts"),
-      l: open(
-        "raycast://extensions/stellate/mxstbr-commands/open-mxs-is-shortlink"
-      ),
+    // Open Raycast Quick Search
+    // NOTE -- NEED TO SET THIS UP IN RAYCAST
+    spacebar: { 
+      to : [
+        {
+          key_code : "spacebar",
+          modifiers : ["left_option", "left_command", "left_control", "left_shift"]
+        }
+      ]
+    }   
+      // open(
+      // "raycast://",
+    ,
+
+    // a = "A"pplication 1 -- Maps to "ctrl". Set up application level shortcuts
+    a: {
+      // asLayer: true,
+     to : [
+        {
+          key_code: "left_command",
+        },
+      ],
     },
 
-    // w = "Window" via rectangle.app
+    // s = "Application 2" -- maps to "ctrl + shift". Set up application level shortcuts   
+    // Usually related to applictaion level navigation shortcuts
+    s: {
+      to: [
+        {
+          key_code: "left_command",
+          modifiers: ["left_shift"],
+        },
+      ],
+    },
+   // w = "Window" via rectangle.app
     w: {
       semicolon: {
         description: "Window: Hide",
@@ -167,9 +157,51 @@ const SystemRules: KarabinerRules[] = [
         ],
       },
     },
+    // b = "B"rowse
+    b: {
+      t: open("https://twitter.com"),
+      // Quarterly "P"lan
+      p: open("https://mxstbr.com/cal"),
+      y: open("https://news.ycombinator.com"),
+      f: open("https://facebook.com"),
+      r: open("https://reddit.com"),
+      h: open("https://hashnode.com/draft"),
+    },
+    // o = "Open" applications
+    o: {
+      1: app("1Password"),
+      g: app("Google Chrome"),
+      c: app("Notion Calendar"),
+      v: app("Zed"),
+      d: app("Discord"),
+      s: app("Slack"),
+      e: app("Superhuman"),
+      n: app("Notion"),
+      t: app("Terminal"),
+      // Open todo list managed via *H*ypersonic
+      h: open(
+        "notion://www.notion.so/stellatehq/7b33b924746647499d906c55f89d5026",
+      ),
+      z: app("zoom.us"),
+      // "M"arkdown (Reflect.app)
+      m: app("Reflect"),
+      r: app("Reflect"),
+      f: app("Finder"),
+      // "i"Message
+      i: app("Texts"),
+      p: app("Spotify"),
+      a: app("iA Presenter"),
+      // "W"hatsApp has been replaced by Texts
+      w: open("Texts"),
+      l: open(
+        "raycast://extensions/stellate/mxstbr-commands/open-mxs-is-shortlink",
+      ),
+    },
+
+ 
 
     // s = "System"
-    s: {
+    d: {
       u: {
         to: [
           {
@@ -291,8 +323,6 @@ const SystemRules: KarabinerRules[] = [
   }),
 ];
 
-
-
 fs.writeFileSync(
   "system-hyper-karabiner.json",
   JSON.stringify(
@@ -310,13 +340,13 @@ fs.writeFileSync(
       ],
     },
     null,
-    2
-  )
+    2,
+  ),
 );
 
-
-import { writeToProfile } from 'https://deno.land/x/karabinerts@1.30.1/deno.ts'
-writeToProfile('Hunter', 
+import { writeToProfile } from "https://deno.land/x/karabinerts@1.30.1/deno.ts";
+writeToProfile(
+"Hunter",
   // @ts-ignore -- incompatible description fields -- should be fine
-  SystemRules
-)
+  SystemRules,
+);

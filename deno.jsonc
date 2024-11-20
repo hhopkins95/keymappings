@@ -1,6 +1,5 @@
 {
   "tasks": {
     "generate": "deno run -A src/rules.ts"
-  }   
+  }
 }
-

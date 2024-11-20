@@ -1,10 +1,11 @@
-import { To, KeyCode, Manipulator, KarabinerRules } from "./types.ts";
+import { KarabinerRules, KeyCode, Manipulator, To } from "./types.ts";
 
 /**
  * Custom way to describe a command in a layer
  */
 export interface LayerCommand {
   to: To[];
+  asLayer?: boolean;
   description?: string;
 }
 
@@ -21,7 +22,7 @@ type HyperKeySublayer = {
 export function createHyperSubLayer(
   sublayer_key: KeyCode,
   commands: HyperKeySublayer,
-  allSubLayerVariables: string[]
+  allSubLayerVariables: string[],
 ): Manipulator[] {
   const subLayerVariableName = generateSubLayerVariableName(sublayer_key);
 
@@ -60,7 +61,7 @@ export function createHyperSubLayer(
       conditions: [
         ...allSubLayerVariables
           .filter(
-            (subLayerVariable) => subLayerVariable !== subLayerVariableName
+            (subLayerVariable) => subLayerVariable !== subLayerVariableName,
           )
           .map((subLayerVariable) => ({
             type: "variable_if" as const,
@@ -93,7 +94,7 @@ export function createHyperSubLayer(
             value: 1,
           },
         ],
-      })
+      }),
     ),
   ];
 }
@@ -103,50 +104,69 @@ export function createHyperSubLayer(
  * have all the hyper variable names in order to filter them and make sure only one
  * activates at a time
  */
-export function createHyperSubLayers(subLayers: {
-  [key_code in KeyCode]?: HyperKeySublayer | LayerCommand;
-}): KarabinerRules[] {
+export function createHyperSubLayers(
+  subLayers: {
+    [key_code in KeyCode]?: HyperKeySublayer | LayerCommand;
+  },
+): KarabinerRules[] {
   const allSubLayerVariables = (
     Object.keys(subLayers) as (keyof typeof subLayers)[]
   ).map((sublayer_key) => generateSubLayerVariableName(sublayer_key));
 
+
+  console.log(allSubLayerVariables);
+
   return Object.entries(subLayers).map(([key, value]) =>
     "to" in value
       ? {
-          description: `Hyper Key + ${key}`,
-          manipulators: [
-            {
-              ...value,
-              type: "basic" as const,
-              from: {
-                key_code: key as KeyCode,
-                modifiers: {
-                  optional: ["any"],
-                },
+        description: `Hyper Key + ${key}`,
+        manipulators: [
+          {
+            ...value,
+            to : [...value.to, {
+              set_variable : { 
+                name : generateSubLayerVariableName(key as KeyCode), 
+                value : 1
+              }
+            }] , 
+            to_after_key_up : [ {
+              set_variable : { 
+                name : generateSubLayerVariableName(key as KeyCode), 
+                value : 0
+              }
+            }],
+
+
+            type: "basic" as const,
+            from: {
+              key_code: key as KeyCode,
+              modifiers: {
+                optional: ["any"],
               },
-              conditions: [
-                {
-                  type: "variable_if",
-                  name: "hyper",
-                  value: 1,
-                },
-                ...allSubLayerVariables.map((subLayerVariable) => ({
-                  type: "variable_if" as const,
-                  name: subLayerVariable,
-                  value: 0,
-                })),
-              ],
             },
-          ],
-        }
+            conditions: [
+              {
+                type: "variable_if",
+                name: "hyper",
+                value: 1,
+              },
+              ...allSubLayerVariables.map((subLayerVariable) => ({
+                type: "variable_if" as const,
+                name: subLayerVariable,
+                value: 0,
+              })),
+            ],
+          },
+        ],
+      }
       : {
-          description: `Hyper Key sublayer "${key}"`,
-          manipulators: createHyperSubLayer(
-            key as KeyCode,
-            value,
-            allSubLayerVariables
-          ),
-        }
+        description: `Hyper Key sublayer "${key}"`,
+        manipulators: createHyperSubLayer(
+          key as KeyCode,
+          value,
+          allSubLayerVariables,
+        ),
+      }
   );
 }
 
