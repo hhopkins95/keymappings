@@ -104,12 +104,6 @@ export function createHyperToManipulators(
   command: LayerCommand,
   allSubLayerVariables: string[],
 ): Manipulator[] {
-  console.log({
-    commandKey,
-    command,
-    allSubLayerVariables,
-  });
-
   const subLayerVariableName = generateSubLayerVariableName(commandKey);
   const allOtherSubLayerVariables = allSubLayerVariables.filter(
     (subLayerVariable) => subLayerVariable !== subLayerVariableName,
@@ -156,7 +150,6 @@ export function createHyperToManipulators(
           name: subLayerVariable,
           value: 0,
         })),
-
       ],
     },
   ];
@@ -185,27 +178,6 @@ export function createHyperSubLayers(
           value,
           allSubLayerVariables,
         ),
-        // manipulators: [
-        //   {
-        //     ...value,
-        //     // type: "basic" as const,
-        //     type : "basic",
-
-        //     from: {
-        //       key_code: key as KeyCode,
-        //       modifiers: {
-        //         optional: ["any"],
-        //       },
-        //     },
-        //     conditions: [
-        //       {
-        //         type: "variable_if",
-        //         name: "hyper",
-        //         value: 1,
-        //       },
-        //     ],
-        //   },
-        // ],
       }
       : {
         description: `Hyper Key sublayer "${key}"`,

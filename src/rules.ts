@@ -3,6 +3,43 @@ import { KarabinerRules } from "./types.ts";
 import { app, createHyperSubLayers, open, rectangle, shell } from "./utils.ts";
 
 const SystemRules: KarabinerRules[] = [
+  // Remap  ctrl <-> cmd
+  // Hyper key cmd is inconvenient for a few functions like save or select all, so keep cmd accessible for these
+  {
+    manipulators: [
+      {
+        description: "",
+        from: {
+          key_code: "left_control",
+          modifiers: {
+            optional: ["any"],
+          },
+        },
+        to: [
+          {
+            key_code: "left_command",
+          },
+        ],
+        type: "basic",
+      },
+      {
+        description: "",
+        from: {
+          key_code: "right_control",
+          modifiers: {
+            optional: ["any"],
+          },
+        },
+        to: [
+          {
+            key_code: "right_command",
+          },
+        ],
+        type: "basic",
+      },
+    ],
+  },
+
   // Define the Hyper key itself
   {
     description: "Hyper Key (⌃⌥⇧⌘)",
@@ -29,7 +66,7 @@ const SystemRules: KarabinerRules[] = [
               name: "hyper",
               value: 0,
             },
-          },
+                        },
         ],
         to_if_alone: [
           {
@@ -38,28 +75,16 @@ const SystemRules: KarabinerRules[] = [
         ],
         type: "basic",
       },
-      // Remap hyper + tab to cmd + tab
-      // {
-      //         type: "basic",
-      //         description: "Hyper Key + Tab -> CMD + Tab",
-      //         from: {
-      //           key_code: "tab",
-      //           modifiers: {
-      //             optional: ["left_command", "shift", "left_alt", "left_option"],
-      //           },
-      //         },
-      //         to: [
-      //           {
-      //             key_code: "tab",
-      //             modifiers: ["left_command"],
-      //           },
-      //         ],
-      // },
     ],
   },
+
   ...createHyperSubLayers({
-    // Open Raycast Quick Search
-    // NOTE -- NEED TO SET THIS UP IN RAYCAST
+    /**
+     * GLOBALS :
+     *
+     * -- Hyper maps to ctrl + cmd + alt + shift
+     * - need to set up the shortcuts in the relevant apps (e.g. raycast, AltTab)
+     */
     spacebar: {
       to: [
         {
@@ -72,11 +97,44 @@ const SystemRules: KarabinerRules[] = [
           ],
         },
       ],
-    },
+    }, // Opens raycast search
 
-    // a = "A"pplication 1 -- Maps to "ctrl". Set up application level shortcuts
+    // App Switching -- Set up in AltTab
+    tab: {
+      to: [
+        {
+          key_code: "tab",
+          modifiers: ["left_command"],
+        },
+      ],
+    }, // Built in cmd + tab -- Quick switch within current app
+    open_bracket: {
+      to: [
+        {
+          key_code: "open_bracket",
+          modifiers: ["left_command", "left_alt", "left_control", "left_shift"],
+        },
+      ],
+    }, // Replacement for built in cmd + tab -- shows all open windows rather than on applictaion level
+    close_bracket: {
+      to: [{
+        key_code: "close_bracket",
+        modifiers: ["left_command", "left_alt", "left_control", "left_shift"],
+      }],
+    }, // shows all windows for current app
+
+    /**
+     * APPLICATION LEVELS
+     *
+     *  convenient modifiers for cmd and cmd + shift
+     *
+     * a = "cmd"
+     * s = "cmd + shift"  -- navigation based (moving between windows, tabs, etc.)
+     *
+     * - set up relevant shortcuts in apps (ie VsCode, Arc...)
+     */
+    // a =
     a: {
-      // asLayer: true,
       to: [
         {
           key_code: "left_command",
@@ -84,9 +142,6 @@ const SystemRules: KarabinerRules[] = [
         },
       ],
     },
-
-    // s = "Application 2" -- maps to "ctrl + shift". Set up application level shortcuts
-    // Usually related to applictaion level navigation shortcuts
     s: {
       to: [
         {
@@ -95,6 +150,10 @@ const SystemRules: KarabinerRules[] = [
         },
       ],
     },
+
+    /**
+     * WINDOW
+     */
     // w = "Window" via rectangle.app
     w: {
       semicolon: {
@@ -160,27 +219,31 @@ const SystemRules: KarabinerRules[] = [
         ],
       },
     },
+
+    /**
+     * OTHER
+     */
     // b = "B"rowse
     b: {
       t: open("https://twitter.com"),
       // Quarterly "P"lan
       p: open("https://mxstbr.com/cal"),
       y: open("https://news.ycombinator.com"),
-      f: open("https://facebook.com"),
       r: open("https://reddit.com"),
       h: open("https://hashnode.com/draft"),
     },
     // o = "Open" applications
     o: {
-      1: app("1Password"),
-      g: app("Google Chrome"),
-      c: app("Notion Calendar"),
-      v: app("Zed"),
+      // 1: app("1Password"),
+      // g: app("Google Chrome"),
+      // c: app("Notion Calendar"),
+      // v: app("Zed"),
       d: app("Discord"),
-      s: app("Slack"),
-      e: app("Superhuman"),
-      n: app("Notion"),
-      t: app("Terminal"),
+      // s: app("Slack"),
+      // e: app("Superhuman"),
+      // n: app("Notion"),
+      t: app("iTerm"),
+
       // Open todo list managed via *H*ypersonic
       h: open(
         "notion://www.notion.so/stellatehq/7b33b924746647499d906c55f89d5026",
@@ -324,6 +387,7 @@ const SystemRules: KarabinerRules[] = [
   }),
 ];
 
+// Write to local file for ref
 fs.writeFileSync(
   "system-hyper-karabiner.json",
   JSON.stringify(
@@ -345,6 +409,7 @@ fs.writeFileSync(
   ),
 );
 
+// Write directly to Karabiner Profile
 import { writeToProfile } from "https://deno.land/x/karabinerts@1.30.1/deno.ts";
 writeToProfile(
   "Hunter",
