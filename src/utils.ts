@@ -99,6 +99,69 @@ export function createHyperSubLayer(
   ];
 }
 
+export function createHyperToManipulators(
+  commandKey: KeyCode,
+  command: LayerCommand,
+  allSubLayerVariables: string[],
+): Manipulator[] {
+  console.log({
+    commandKey,
+    command,
+    allSubLayerVariables,
+  });
+
+  const subLayerVariableName = generateSubLayerVariableName(commandKey);
+  const allOtherSubLayerVariables = allSubLayerVariables.filter(
+    (subLayerVariable) => subLayerVariable !== subLayerVariableName,
+  );
+  return [
+    {
+      type: "basic",
+      from: {
+        key_code: commandKey,
+        modifiers: {
+          optional: ["any"],
+        },
+      },
+      to: [
+        {
+          set_variable: {
+            name: subLayerVariableName,
+            value: 1,
+          },
+        },
+        {
+          key_code: command.to[0].key_code,
+          modifiers: command.to[0].modifiers,
+        },
+      ],
+
+      to_after_key_up: [
+        {
+          set_variable: {
+            name: subLayerVariableName,
+            value: 0,
+          },
+        },
+      ],
+
+      conditions: [
+        {
+          type: "variable_if",
+          name: "hyper",
+          value: 1,
+        },
+        ...allOtherSubLayerVariables.map((subLayerVariable) => ({
+          type: "variable_if" as const,
+          name: subLayerVariable,
+          value: 0,
+        })),
+
+      ],
+    },
+  ];
+}
+
 /**
  * Create all hyper sublayers. This needs to be a single function, as well need to
  * have all the hyper variable names in order to filter them and make sure only one
@@ -113,51 +176,36 @@ export function createHyperSubLayers(
     Object.keys(subLayers) as (keyof typeof subLayers)[]
   ).map((sublayer_key) => generateSubLayerVariableName(sublayer_key));
 
-
-  console.log(allSubLayerVariables);
-
   return Object.entries(subLayers).map(([key, value]) =>
     "to" in value
       ? {
         description: `Hyper Key + ${key}`,
-        manipulators: [
-          {
-            ...value,
-            to : [...value.to, {
-              set_variable : { 
-                name : generateSubLayerVariableName(key as KeyCode), 
-                value : 1
-              }
-            }] , 
-            to_after_key_up : [ {
-              set_variable : { 
-                name : generateSubLayerVariableName(key as KeyCode), 
-                value : 0
-              }
-            }],
+        manipulators: createHyperToManipulators(
+          key as KeyCode,
+          value,
+          allSubLayerVariables,
+        ),
+        // manipulators: [
+        //   {
+        //     ...value,
+        //     // type: "basic" as const,
+        //     type : "basic",
 
-
-            type: "basic" as const,
-            from: {
-              key_code: key as KeyCode,
-              modifiers: {
-                optional: ["any"],
-              },
-            },
-            conditions: [
-              {
-                type: "variable_if",
-                name: "hyper",
-                value: 1,
-              },
-              ...allSubLayerVariables.map((subLayerVariable) => ({
-                type: "variable_if" as const,
-                name: subLayerVariable,
-                value: 0,
-              })),
-            ],
-          },
-        ],
+        //     from: {
+        //       key_code: key as KeyCode,
+        //       modifiers: {
+        //         optional: ["any"],
+        //       },
+        //     },
+        //     conditions: [
+        //       {
+        //         type: "variable_if",
+        //         name: "hyper",
+        //         value: 1,
+        //       },
+        //     ],
+        //   },
+        // ],
       }
       : {
         description: `Hyper Key sublayer "${key}"`,

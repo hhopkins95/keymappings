@@ -60,29 +60,32 @@ const SystemRules: KarabinerRules[] = [
   ...createHyperSubLayers({
     // Open Raycast Quick Search
     // NOTE -- NEED TO SET THIS UP IN RAYCAST
-    spacebar: { 
-      to : [
+    spacebar: {
+      to: [
         {
-          key_code : "spacebar",
-          modifiers : ["left_option", "left_command", "left_control", "left_shift"]
-        }
-      ]
-    }   
-      // open(
-      // "raycast://",
-    ,
-
-    // a = "A"pplication 1 -- Maps to "ctrl". Set up application level shortcuts
-    a: {
-      // asLayer: true,
-     to : [
-        {
-          key_code: "left_command",
+          key_code: "spacebar",
+          modifiers: [
+            "left_option",
+            "left_command",
+            "left_control",
+            "left_shift",
+          ],
         },
       ],
     },
 
-    // s = "Application 2" -- maps to "ctrl + shift". Set up application level shortcuts   
+    // a = "A"pplication 1 -- Maps to "ctrl". Set up application level shortcuts
+    a: {
+      // asLayer: true,
+      to: [
+        {
+          key_code: "left_command",
+          modifiers: ["left_command"],
+        },
+      ],
+    },
+
+    // s = "Application 2" -- maps to "ctrl + shift". Set up application level shortcuts
     // Usually related to applictaion level navigation shortcuts
     s: {
       to: [
@@ -92,7 +95,7 @@ const SystemRules: KarabinerRules[] = [
         },
       ],
     },
-   // w = "Window" via rectangle.app
+    // w = "Window" via rectangle.app
     w: {
       semicolon: {
         description: "Window: Hide",
@@ -197,8 +200,6 @@ const SystemRules: KarabinerRules[] = [
         "raycast://extensions/stellate/mxstbr-commands/open-mxs-is-shortlink",
       ),
     },
-
- 
 
     // s = "System"
     d: {
@@ -346,7 +347,7 @@ fs.writeFileSync(
 
 import { writeToProfile } from "https://deno.land/x/karabinerts@1.30.1/deno.ts";
 writeToProfile(
-"Hunter",
+  "Hunter",
   // @ts-ignore -- incompatible description fields -- should be fine
   SystemRules,
 );

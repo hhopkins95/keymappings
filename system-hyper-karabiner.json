@@ -49,7 +49,22 @@
             "description": "Hyper Key + spacebar",
             "manipulators": [
               {
+                "type": "basic",
+                "from": {
+                  "key_code": "spacebar",
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
                 "to": [
+                  {
+                    "set_variable": {
+                      "name": "hyper_sublayer_spacebar",
+                      "value": 1
+                    }
+                  },
                   {
                     "key_code": "spacebar",
                     "modifiers": [
@@ -58,12 +73,6 @@
                       "left_control",
                       "left_shift"
                     ]
-                  },
-                  {
-                    "set_variable": {
-                      "name": "hyper_sublayer_spacebar",
-                      "value": 1
-                    }
                   }
                 ],
                 "to_after_key_up": [
@@ -74,25 +83,11 @@
                     }
                   }
                 ],
-                "type": "basic",
-                "from": {
-                  "key_code": "spacebar",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
                 "conditions": [
                   {
                     "type": "variable_if",
                     "name": "hyper",
                     "value": 1
-                  },
-                  {
-                    "type": "variable_if",
-                    "name": "hyper_sublayer_spacebar",
-                    "value": 0
                   },
                   {
                     "type": "variable_if",
@@ -142,15 +137,27 @@
             "description": "Hyper Key + a",
             "manipulators": [
               {
+                "type": "basic",
+                "from": {
+                  "key_code": "a",
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
                 "to": [
-                  {
-                    "key_code": "left_command"
-                  },
                   {
                     "set_variable": {
                       "name": "hyper_sublayer_a",
                       "value": 1
                     }
+                  },
+                  {
+                    "key_code": "left_command",
+                    "modifiers": [
+                      "left_command"
+                    ]
                   }
                 ],
                 "to_after_key_up": [
@@ -161,15 +168,6 @@
                     }
                   }
                 ],
-                "type": "basic",
-                "from": {
-                  "key_code": "a",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
                 "conditions": [
                   {
                     "type": "variable_if",
@@ -179,11 +177,6 @@
                   {
                     "type": "variable_if",
                     "name": "hyper_sublayer_spacebar",
-                    "value": 0
-                  },
-                  {
-                    "type": "variable_if",
-                    "name": "hyper_sublayer_a",
                     "value": 0
                   },
                   {
@@ -229,18 +222,27 @@
             "description": "Hyper Key + s",
             "manipulators": [
               {
-                "to": [
-                  {
-                    "key_code": "left_command",
-                    "modifiers": [
-                      "left_shift"
+                "type": "basic",
+                "from": {
+                  "key_code": "s",
+                  "modifiers": {
+                    "optional": [
+                      "any"
                     ]
-                  },
+                  }
+                },
+                "to": [
                   {
                     "set_variable": {
                       "name": "hyper_sublayer_s",
                       "value": 1
                     }
+                  },
+                  {
+                    "key_code": "left_command",
+                    "modifiers": [
+                      "left_shift"
+                    ]
                   }
                 ],
                 "to_after_key_up": [
@@ -251,15 +253,6 @@
                     }
                   }
                 ],
-                "type": "basic",
-                "from": {
-                  "key_code": "s",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
                 "conditions": [
                   {
                     "type": "variable_if",
@@ -274,11 +267,6 @@
                   {
                     "type": "variable_if",
                     "name": "hyper_sublayer_a",
-                    "value": 0
-                  },
-                  {
-                    "type": "variable_if",
-                    "name": "hyper_sublayer_s",
                     "value": 0
                   },
                   {
