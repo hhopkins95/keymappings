@@ -12,25 +12,21 @@
     "key": "cmd+space",
     "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly && !suggestWidgetVisible"
   }, // Bring up suggestion menu
-
   {
     "command": "editor.action.showHover",
     "key": "shift-k",
     "when": "vim.mode == 'Normal' && editorTextFocus"
   }, // Show hover for current symbol
-
   {
     "command": "editor.action.peekTypeDefinition",
     "key": "shift-l",
     "when": "vim.mode == 'Normal' && editorTextFocus"
   }, // Peek at type definition
-
   {
     "command": "editor.action.revealDefinition",
     "key": "space g d",
     "when": "vim.mode == 'Normal' && editorTextFocus"
   }, // Jump to definition
-
   {
     "command": "editor.action.goToReferences",
     "key": "space g r",
@@ -38,10 +34,7 @@
   }, // Jump to references
   /**
 
-
     Code Actions 
-
-
 
   */
   {
@@ -57,8 +50,8 @@
   {
     "command": "editor.action.codeAction",
     "key": "space c a",
-    "when": "vim.mode == 'Normal' && editorTextFocus"
-  }, // Quick fix
+    "when": "vim.moade == 'Normal' && editorTextFocus"
+  }, // Code Action
   {
     "args": {
       "cwd": "${fileDirname}"
@@ -69,10 +62,36 @@
   /** 
 
 
-  FOCUS / LAYOUT -- alter where the focus is, or what windows are open / where they are
+FOCUS / LAYOUT -- alter where the focus is, or what windows are open / where they are
 
 
+At a glance :
+
+Toggle Panels without changing focus : 
+ (cmd + {key})  -- with hyper key == 'caps + a'
+
+- toggle sidebar visibility  [cmd + l]
+- toggle secondary sidebar visibility [cmd + h]
+
+
+Change Focus : 
+
+(cmd + shift + {key}) -- with hyper key == 'caps + d'
+
+  - editor
+  - files explorer
+  - terminal
+  - ws cascade / ai editor (change based on )
+ - project manager
+  - project manager git 
+  - git panel
+  - file search 
   */
+  {
+    "command": "workbench.action.toggleSidebarVisibility",
+    "key": "cmd+l"
+  },
+
   {
     "command": "workbench.action.showAllEditors",
     "key": "space ,",
@@ -97,7 +116,6 @@
     "command": "workbench.action.focusPanel",
     "key": "shift+cmd+j"
   }, // Focus Terminal Panel
-
   {
     "args": {
       "commands": [
@@ -114,11 +132,6 @@
     "key": "space e",
     "when": "vim.mode == 'Normal' && editorTextFocus && foldersViewVisible"
   }, // Focus Files Explorer
-  {
-    "command": "workbench.action.previousEditorInGroup",
-    "key": "shift-tab",
-    "when": "(vim.mode == 'Normal' || vim.mode == 'Visual') && (editorTextFocus || !inputFocus)"
-  }, // Previous editor in group
   {
     "command": "workbench.action.findInFiles",
     "key": "space s g",
@@ -141,7 +154,6 @@
 
 
     FILE EXPLORER -- Hotkeys for when the file explorer is focused
-
 
   */
   {
@@ -212,7 +224,7 @@
   TERMINAL Hotkeys for when the terminal is focused
 
 
-  */
+   */
   {
     "command": "workbench.action.terminal.focusNext",
     "key": "tab",
@@ -265,7 +277,6 @@ LISTS - navigating popoup lists
     "key": "cmd+k",
     "when": "listFocus && !inputFocus && !treestickyScrollFocused"
   },
-
   {
     "command": "list.focusDown",
     "key": "cmd+j",
@@ -281,15 +292,173 @@ LISTS - navigating popoup lists
     "key": "cmd+k",
     "when": "inQuickOpen"
   },
-
   /**
 
-Uncategorized
+Misc
 
 */
 
-  // negative cmd + n
   {
-    "command": "-workbench.action.files.newUntitledFile"
+    "key": "shift+cmd+s",
+    "command": "workbench.action.files.saveFiles"
+  },
+  {
+    "key": "shift+cmd+s",
+    "command": "-workbench.action.files.saveAs"
+  },
+  {
+    "key": "cmd+b",
+    "command": "-workbench.action.toggleSidebarVisibility"
+  },
+  {
+    "key": "cmd+h",
+    "command": "workbench.action.toggleAuxiliaryBar"
+  },
+  {
+    "key": "alt+cmd+b",
+    "command": "-workbench.action.toggleAuxiliaryBar"
+  },
+  {
+    "key": "shift+cmd+h",
+    "command": "windsurf.prioritized.chat.open",
+    "when": "!terminalFocus"
+  },
+  {
+    "key": "cmd+l",
+    "command": "-windsurf.prioritized.chat.open",
+    "when": "!terminalFocus"
+  },
+  {
+    "key": "shift+cmd+h",
+    "command": "windsurf.prioritized.chat.openFromTerminal",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "cmd+l",
+    "command": "-windsurf.prioritized.chat.openFromTerminal",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "shift+cmd+j",
+    "command": "terminal.focus"
+  },
+  {
+    "key": "shift+cmd+e",
+    "command": "workbench.files.action.focusOpenEditorsView",
+    "when": "workbench.explorer.openEditorsView.active"
+  },
+  {
+    "key": "cmd+k e",
+    "command": "-workbench.files.action.focusOpenEditorsView",
+    "when": "workbench.explorer.openEditorsView.active"
+  },
+  {
+    "key": "shift+cmd+e",
+    "command": "-workbench.view.explorer",
+    "when": "viewContainer.workbench.view.explorer.enabled"
+  },
+  {
+    "key": "shift+cmd+h",
+    "command": "windsurf.chatPanelView.focus"
+  },
+  {
+    "key": "shift+cmd+space",
+    "command": "workbench.action.focusActiveEditorGroup"
+  },
+  {
+    "key": "shift+cmd+m",
+    "command": "projectsExplorerFavorites.focus"
+  },
+  {
+    "key": "shift+cmd+l",
+    "command": "workbench.explorer.fileView.focus"
+  },
+  {
+    "key": "shift+cmd+g",
+    "command": "workbench.view.scm",
+    "when": "workbench.scm.active"
+  },
+  {
+    "key": "ctrl+shift+g",
+    "command": "-workbench.view.scm",
+    "when": "workbench.scm.active"
+  },
+  {
+    "key": "ctrl+cmd+l",
+    "command": "workbench.action.terminal.focusNextPane",
+    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+  },
+  {
+    "key": "alt+cmd+right",
+    "command": "-workbench.action.terminal.focusNextPane",
+    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+  },
+  {
+    "key": "ctrl+cmd+l",
+    "command": "workbench.action.nextEditor"
+  },
+  {
+    "key": "alt+cmd+right",
+    "command": "-workbench.action.nextEditor"
+  },
+  {
+    "key": "ctrl+cmd+h",
+    "command": "workbench.action.terminal.focusPreviousPane",
+    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+  },
+  {
+    "key": "alt+cmd+left",
+    "command": "-workbench.action.terminal.focusPreviousPane",
+    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+  },
+  {
+    "key": "ctrl+cmd+h",
+    "command": "workbench.action.previousEditor"
+  },
+  {
+    "key": "alt+cmd+left",
+    "command": "-workbench.action.previousEditor"
+  },
+  {
+    "key": "ctrl+cmd+]",
+    "command": "workbench.action.moveEditorToNextGroup"
+  },
+  {
+    "key": "ctrl+cmd+right",
+    "command": "-workbench.action.moveEditorToNextGroup"
+  },
+  {
+    "key": "ctrl+cmd+[",
+    "command": "workbench.action.moveEditorToPreviousGroup"
+  },
+  {
+    "key": "ctrl+cmd+left",
+    "command": "-workbench.action.moveEditorToPreviousGroup"
+  },
+  {
+    "key": "shift+cmd+[",
+    "command": "workbench.action.focusLeftGroup"
+  },
+  {
+    "key": "cmd+k cmd+left",
+    "command": "-workbench.action.focusLeftGroup"
+  },
+  {
+    "key": "shift+cmd+]",
+    "command": "workbench.action.focusRightGroup"
+  },
+  {
+    "key": "cmd+k cmd+right",
+    "command": "-workbench.action.focusRightGroup"
+  },
+  {
+    "key": "ctrl+cmd+o",
+    "command": "windsurf.chat.openShortcuts",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "shift+cmd+l",
+    "command": "-windsurf.chat.openShortcuts",
+    "when": "editorTextFocus"
   }
 ]
