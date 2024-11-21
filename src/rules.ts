@@ -66,7 +66,7 @@ const SystemRules: KarabinerRules[] = [
               name: "hyper",
               value: 0,
             },
-              },
+          },
         ],
         to_if_alone: [
           {
@@ -99,6 +99,24 @@ const SystemRules: KarabinerRules[] = [
       ],
     }, // Opens raycast search
 
+    backslash: {
+      to: [
+        {
+          key_code: "backslash",
+          modifiers: ["left_option", "left_control"],
+        },
+      ],
+    }, // Opens mission control -- set up via Apple system preferences
+
+    left_shift: {
+      to: [
+        {
+          key_code: "left_command",
+          modifiers: ["left_control", "left_shift", "left_alt"],
+        },
+      ],
+    }, // Actual Hyper key
+
     // App Switching -- Set up in AltTab
     tab: {
       to: [
@@ -129,6 +147,7 @@ const SystemRules: KarabinerRules[] = [
      *  convenient modifiers for cmd and cmd + shift
      *
      * a = "cmd"
+     * s = "cmd + control"
      * d = "cmd + shift"  -- navigation based (moving between windows, tabs, etc.)
      *
      * - set up relevant shortcuts in apps (ie VsCode, Arc...)
@@ -142,14 +161,14 @@ const SystemRules: KarabinerRules[] = [
       ],
     },
 
-    s : { 
-      to : [ 
-        { 
+    s: {
+      to: [
+        {
           key_code: "left_control",
-        }
-      ]
-    },  
-
+          modifiers: ["left_command"],
+        },
+      ],
+    },
 
     d: {
       to: [

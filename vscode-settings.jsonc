@@ -212,7 +212,7 @@
   TERMINAL Hotkeys for when the terminal is focused
 
 
-   */
+  */
   {
     "command": "workbench.action.terminal.focusNext",
     "key": "tab",
@@ -280,11 +280,16 @@ LISTS - navigating popoup lists
     "command": "quickInput.previous",
     "key": "cmd+k",
     "when": "inQuickOpen"
-  }
+  },
 
   /**
 
 Uncategorized
 
 */
+
+  // negative cmd + n
+  {
+    "command": "-workbench.action.files.newUntitledFile"
+  }
 ]
