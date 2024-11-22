@@ -379,18 +379,9 @@ Windsurf Chat
     "command": "-editor.foldLevel1",
     "when": "editorTextFocus && foldingEnabled"
   }, // ^^ neg
+
   {
-    "key": "ctrl+cmd+-",
-    "command": "editor.foldAll",
-    "when": "editorTextFocus && foldingEnabled"
-  },
-  {
-    "key": "cmd+k cmd+0",
-    "command": "-editor.foldAll",
-    "when": "editorTextFocus && foldingEnabled"
-  },
-  {
-    "key": "ctrl+cmd+=",
+    "key": "ctrl+cmd+=;",
     "command": "editor.fold",
     "when": "editorTextFocus && foldingEnabled"
   },
@@ -409,6 +400,30 @@ Windsurf Chat
     "command": "-editor.foldLevel2",
     "when": "editorTextFocus && foldingEnabled"
   },
+
+  /**
+
+  PROJECT MANAGER
+
+  */
+  {
+    "key": "ctrl+cmd+p",
+    "command": "projectManager.listProjects"
+  },
+  {
+    "key": "alt+cmd+p",
+    "command": "-projectManager.listProjects"
+  },
+  {
+    "key": "ctrl+cmd+=",
+    "command": "projectManager.addToWorkspace"
+  },
+  {
+    "key": "ctrl+cmd+-",
+    "command": "workbench.action.removeRootFolder",
+    "when": "enterMultiRootWorkspaceSupport && workspaceFolderCount != '0' || workbenchState == 'workspace' && workspaceFolderCount != '0'"
+  }, // ^^ neg
+
   /**
 
 MISC
