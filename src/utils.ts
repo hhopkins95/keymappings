@@ -98,7 +98,6 @@ export function createHyperSubLayer(
     ),
   ];
 }
-
 export function createHyperToManipulators(
   commandKey: KeyCode,
   command: LayerCommand,

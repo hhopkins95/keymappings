@@ -11,145 +11,37 @@
     "command": "editor.action.triggerSuggest",
     "key": "cmd+space",
     "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly && !suggestWidgetVisible"
-  }, // Bring up suggestion menu
+  }, // Bring up suggestion menu -- cmd space
   {
     "command": "editor.action.showHover",
     "key": "shift-k",
     "when": "vim.mode == 'Normal' && editorTextFocus"
-  }, // Show hover for current symbol
+  }, // Show hover for current symbol -- shift k
   {
     "command": "editor.action.peekTypeDefinition",
     "key": "shift-l",
     "when": "vim.mode == 'Normal' && editorTextFocus"
-  }, // Peek at type definition
+  }, // Peek at type definition -- shift l
   {
     "command": "editor.action.revealDefinition",
     "key": "space g d",
     "when": "vim.mode == 'Normal' && editorTextFocus"
-  }, // Jump to definition
+  }, // Jump to definition -- space g d
   {
     "command": "editor.action.goToReferences",
     "key": "space g r",
     "when": "vim.mode == 'Normal' && editorTextFocus"
-  }, // Jump to references
-  /**
-
-    Code Actions 
-
-  */
+  }, // Jump to references -- space g r
   {
     "command": "editor.action.rename",
     "key": "space c r",
     "when": "vim.mode == 'Normal' && editorTextFocus"
-  }, // Rename symbol
+  }, // Rename symbol -- space c r
   {
     "command": "workbench.action.gotoSymbol",
     "key": "space c s",
     "when": "vim.mode == 'Normal' && editorTextFocus"
-  }, // Go to symbol
-  {
-    "command": "editor.action.codeAction",
-    "key": "space c a",
-    "when": "vim.moade == 'Normal' && editorTextFocus"
-  }, // Code Action
-  {
-    "args": {
-      "cwd": "${fileDirname}"
-    },
-    "command": "workbench.action.terminal.newWithCwd",
-    "key": "alt+cmd+j"
-  }, // Add new terminal at the director of the current file
-  /** 
-
-
-FOCUS / LAYOUT -- alter where the focus is, or what windows are open / where they are
-
-
-At a glance :
-
-Toggle Panels without changing focus : 
- (cmd + {key})  -- with hyper key == 'caps + a'
-
-- toggle sidebar visibility  [cmd + l]
-- toggle secondary sidebar visibility [cmd + h]
-
-
-Change Focus : 
-
-(cmd + shift + {key}) -- with hyper key == 'caps + d'
-
-  - editor
-  - files explorer
-  - terminal
-  - ws cascade / ai editor (change based on )
- - project manager
-  - project manager git 
-  - git panel
-  - file search 
-  */
-  {
-    "command": "workbench.action.toggleSidebarVisibility",
-    "key": "cmd+l"
-  },
-
-  {
-    "command": "workbench.action.showAllEditors",
-    "key": "space ,",
-    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
-  }, // Show all editors
-  {
-    "args": {
-      "commands": [
-        "workbench.action.toggleSidebarVisibility",
-        "workbench.files.action.focusFilesExplorer"
-      ]
-    },
-    "command": "runCommands",
-    "key": "space e",
-    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus) && !sideBarFocus"
-  }, // Toggle sidebar visibility and focus files explorer
-  {
-    "command": "workbench.view.extension.project-manager",
-    "key": "shift+cmd+m"
-  }, // Focus Project Manager
-  {
-    "command": "workbench.action.focusPanel",
-    "key": "shift+cmd+j"
-  }, // Focus Terminal Panel
-  {
-    "args": {
-      "commands": [
-        "workbench.action.toggleSidebarVisibility",
-        "workbench.action.focusActiveEditorGroup"
-      ]
-    },
-    "command": "runCommands",
-    "key": "space e",
-    "when": "vim.mode == 'Normal' && sideBarFocus && !inputFocus"
-  }, // Toggle sidebar visibility and focus active editor group
-  {
-    "command": "workbench.files.action.focusFilesExplorer",
-    "key": "space e",
-    "when": "vim.mode == 'Normal' && editorTextFocus && foldersViewVisible"
-  }, // Focus Files Explorer
-  {
-    "command": "workbench.action.findInFiles",
-    "key": "space s g",
-    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
-  },
-  {
-    "args": {
-      "commands": ["workbench.view.scm", "workbench.scm.focus"]
-    },
-    "command": "runCommands",
-    "key": "space g g",
-    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
-  },
-  {
-    "command": "editor.action.addSelectionToNextFindMatch",
-    "key": "ctrl-n",
-    "when": "(vim.mode == 'Normal' || vim.mode == 'Visual') && (editorTextFocus || !inputFocus)"
-  },
+  }, // Go to symbol -- space c s
   /**
 
 
@@ -261,6 +153,10 @@ Change Focus :
 LISTS - navigating popoup lists
 
 
+Basically : 
+cmd + j == go down in list 
+cmd + k == go up in list
+
 */
   {
     "command": "selectPrevSuggestion",
@@ -292,165 +188,171 @@ LISTS - navigating popoup lists
     "key": "cmd+k",
     "when": "inQuickOpen"
   },
-  /**
+  /** 
 
-Misc
 
-*/
+FOCUS / LAYOUT -- alter where the focus is, or what windows are open / where they are
 
+  */
   {
-    "key": "shift+cmd+s",
-    "command": "workbench.action.files.saveFiles"
-  },
-  {
-    "key": "shift+cmd+s",
-    "command": "-workbench.action.files.saveAs"
-  },
+    "command": "workbench.action.toggleSidebarVisibility",
+    "key": "cmd+l"
+  }, // Toggle Sidebar Visibility
   {
     "key": "cmd+b",
     "command": "-workbench.action.toggleSidebarVisibility"
-  },
+  }, // ^^ neg
+  {
+    "command": "workbench.action.showAllEditors",
+    "key": "space space",
+    "when": "editorTextFocus && vim.mode == 'Normal' || !inputFocus && vim.mode == 'Normal'"
+  }, // Show all open editors in list
+  {
+    "command": "workbench.view.extension.project-manager",
+    "key": "shift+cmd+m"
+  }, // Focus Project Manager
+  {
+    "command": "workbench.action.focusPanel",
+    "key": "shift+cmd+j"
+  }, // Focus Terminal Panel
   {
     "key": "cmd+h",
     "command": "workbench.action.toggleAuxiliaryBar"
-  },
+  }, // Toggle Secondary siderbar
   {
     "key": "alt+cmd+b",
     "command": "-workbench.action.toggleAuxiliaryBar"
-  },
+  }, // ^^ neg
   {
     "key": "shift+cmd+h",
     "command": "windsurf.prioritized.chat.open",
     "when": "!terminalFocus"
-  },
-  {
-    "key": "cmd+l",
-    "command": "-windsurf.prioritized.chat.open",
-    "when": "!terminalFocus"
-  },
+  }, // Focus Windsurf Chat
   {
     "key": "shift+cmd+h",
     "command": "windsurf.prioritized.chat.openFromTerminal",
     "when": "terminalFocus"
-  },
+  }, // Focus Windsurf Chat from Terminal
+  {
+    "key": "shift+cmd+h",
+    "command": "windsurf.chatPanelView.focus"
+  }, // Focus Windsurf Chat
+  {
+    "key": "cmd+l",
+    "command": "-windsurf.prioritized.chat.open",
+    "when": "!terminalFocus"
+  }, // ^^ neg
   {
     "key": "cmd+l",
     "command": "-windsurf.prioritized.chat.openFromTerminal",
     "when": "terminalFocus"
-  },
+  }, // ^^ neg
   {
     "key": "shift+cmd+j",
     "command": "terminal.focus"
-  },
-  {
-    "key": "shift+cmd+e",
-    "command": "workbench.files.action.focusOpenEditorsView",
-    "when": "workbench.explorer.openEditorsView.active"
-  },
-  {
-    "key": "cmd+k e",
-    "command": "-workbench.files.action.focusOpenEditorsView",
-    "when": "workbench.explorer.openEditorsView.active"
-  },
-  {
-    "key": "shift+cmd+e",
-    "command": "-workbench.view.explorer",
-    "when": "viewContainer.workbench.view.explorer.enabled"
-  },
-  {
-    "key": "shift+cmd+h",
-    "command": "windsurf.chatPanelView.focus"
-  },
+  }, // Focus Terminal
+
   {
     "key": "shift+cmd+space",
     "command": "workbench.action.focusActiveEditorGroup"
-  },
+  }, // Focus Editor
   {
     "key": "shift+cmd+m",
     "command": "projectsExplorerFavorites.focus"
-  },
+  }, // Focus Project Manager
   {
     "key": "shift+cmd+l",
     "command": "workbench.explorer.fileView.focus"
-  },
+  }, // Focus Files Explorer
   {
     "key": "shift+cmd+g",
     "command": "workbench.view.scm",
     "when": "workbench.scm.active"
-  },
+  }, // Focus Src Control
   {
     "key": "ctrl+shift+g",
     "command": "-workbench.view.scm",
     "when": "workbench.scm.active"
-  },
+  }, // ^^ neg
+  /*
+
+
+  Editor Navigation (ctrl + cmd) -- w/ hyper == caps + s
+
+
+  */
   {
     "key": "ctrl+cmd+l",
     "command": "workbench.action.terminal.focusNextPane",
     "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
-  },
+  }, // Focus Next Terminal Pane
   {
     "key": "alt+cmd+right",
     "command": "-workbench.action.terminal.focusNextPane",
     "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
-  },
+  }, // ^^ neg
   {
     "key": "ctrl+cmd+l",
     "command": "workbench.action.nextEditor"
-  },
+  }, // Focus Next Editor Pane
   {
     "key": "alt+cmd+right",
     "command": "-workbench.action.nextEditor"
-  },
+  }, // ^^ neg
   {
     "key": "ctrl+cmd+h",
     "command": "workbench.action.terminal.focusPreviousPane",
     "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
-  },
+  }, // Focus Previous Terminal Pane
   {
     "key": "alt+cmd+left",
     "command": "-workbench.action.terminal.focusPreviousPane",
     "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
-  },
+  }, // ^^ neg
   {
     "key": "ctrl+cmd+h",
     "command": "workbench.action.previousEditor"
-  },
+  }, // Focus Previous Editor Pane
   {
     "key": "alt+cmd+left",
     "command": "-workbench.action.previousEditor"
-  },
+  }, // ^^ neg
   {
     "key": "ctrl+cmd+]",
     "command": "workbench.action.moveEditorToNextGroup"
-  },
+  }, // Move Editor to Next Group
   {
     "key": "ctrl+cmd+right",
     "command": "-workbench.action.moveEditorToNextGroup"
-  },
+  }, // ^^ neg
   {
     "key": "ctrl+cmd+[",
     "command": "workbench.action.moveEditorToPreviousGroup"
-  },
+  }, // Move Editor to Previous Group
   {
     "key": "ctrl+cmd+left",
     "command": "-workbench.action.moveEditorToPreviousGroup"
-  },
+  }, // ^^ neg
   {
     "key": "shift+cmd+[",
     "command": "workbench.action.focusLeftGroup"
-  },
+  }, // Focus Left Group
   {
     "key": "cmd+k cmd+left",
     "command": "-workbench.action.focusLeftGroup"
-  },
+  }, // ^^ neg
   {
     "key": "shift+cmd+]",
     "command": "workbench.action.focusRightGroup"
-  },
+  }, // Focus Right Group
   {
     "key": "cmd+k cmd+right",
     "command": "-workbench.action.focusRightGroup"
-  },
+  }, // ^^ neg
+
+  /*
+Windsurf Chat
+  */
   {
     "key": "ctrl+cmd+o",
     "command": "windsurf.chat.openShortcuts",
@@ -460,5 +362,97 @@ Misc
     "key": "shift+cmd+l",
     "command": "-windsurf.chat.openShortcuts",
     "when": "editorTextFocus"
-  }
+  },
+
+  /*
+
+  FOLDING
+
+  */
+  {
+    "key": "ctrl+cmd+0",
+    "command": "editor.foldLevel1",
+    "when": "editorTextFocus && foldingEnabled"
+  },
+  {
+    "key": "cmd+k cmd+1",
+    "command": "-editor.foldLevel1",
+    "when": "editorTextFocus && foldingEnabled"
+  }, // ^^ neg
+  {
+    "key": "ctrl+cmd+-",
+    "command": "editor.foldAll",
+    "when": "editorTextFocus && foldingEnabled"
+  },
+  {
+    "key": "cmd+k cmd+0",
+    "command": "-editor.foldAll",
+    "when": "editorTextFocus && foldingEnabled"
+  },
+  {
+    "key": "ctrl+cmd+=",
+    "command": "editor.fold",
+    "when": "editorTextFocus && foldingEnabled"
+  },
+  {
+    "key": "alt+cmd+[",
+    "command": "-editor.fold",
+    "when": "editorTextFocus && foldingEnabled"
+  },
+  {
+    "key": "ctrl+cmd+9",
+    "command": "editor.foldLevel2",
+    "when": "editorTextFocus && foldingEnabled"
+  },
+  {
+    "key": "cmd+k cmd+2",
+    "command": "-editor.foldLevel2",
+    "when": "editorTextFocus && foldingEnabled"
+  },
+  /**
+
+MISC
+
+*/
+
+  {
+    "key": "shift+cmd+s",
+    "command": "workbench.action.files.saveFiles"
+  }, // Save all
+  {
+    "key": "shift+cmd+s",
+    "command": "-workbench.action.files.saveAs"
+  }, // ^^ neg
+  {
+    "command": "editor.action.codeAction",
+    "key": "space c a",
+    "when": "vim.moade == 'Normal' && editorTextFocus"
+  }, // Code Action
+  {
+    "args": {
+      "cwd": "${fileDirname}"
+    },
+    "command": "workbench.action.terminal.newWithCwd",
+    "key": "ctrl+cmd+j"
+  }, // Add new terminal at the director of the current file
+  {
+    "key": "cmd+]",
+    "command": "editor.action.marker.nextInFiles",
+    "when": "editorFocus"
+  }, // Go to next issue in file
+  {
+    "key": "f8",
+    "command": "-editor.action.marker.nextInFiles",
+    "when": "editorFocus"
+  }, // ^^ neg
+  {
+    "key": "cmd+[",
+    "command": "editor.action.marker.prev",
+    "when": "editorFocus"
+  }, // Go to previous issue in file
+  {
+    "key": "shift+alt+f8",
+    "command": "-editor.action.marker.prev",
+    "when": "editorFocus"
+  } // ^^ neg
 ]
